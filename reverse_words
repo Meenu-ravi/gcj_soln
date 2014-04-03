@@ -1,0 +1,50 @@
+##This solves the following question:
+##    Given a list of space separated words, reverse the order of the words.
+##    Each line of text contains L letters and W words. A line will only
+##    consist of letters and space characters. There will be exactly one space
+##    character between each pair of consecutive words.
+##
+##Input
+##The first line of input gives the number of cases, N.
+##N test cases follow. For each test case there will a line of letters and
+##space characters indicating a list of space separated words.
+##Spaces will not appear at the start or end of a line.
+##
+##Output
+##For each test case, output one line containing "Case #x: "
+##followed by the list of words in reverse order.
+
+
+def ans(rev_word):
+    """This function takes the sentence to be reversed and reverse the sentence and shows the output"""
+    splitted = list(rev_word.split())
+    ##We can use the reverse and join methods
+    splitted.reverse()
+    return ' '.join(splitted)
+    ##We can use split method with indices
+    ##return ' '.join(rev_word.split()[::-1])
+
+if __name__ == '__main__':
+    try:
+        fp = open('B-small-practice.in', 'r')
+        testcases = int(fp.readline())
+        for tc in xrange(testcases):
+            print "Case #%d: %s" % (tc+1, ans(fp.readline().strip()))
+    except Exception:
+        print "Unable to parse the file"
+
+
+##sample input:
+##5
+##this is a test
+##foobar
+##all your base
+##class
+##pony along
+##
+##sample output:
+##Case #1: test a is this
+##Case #2: foobar
+##Case #3: base your all
+##Case #4: class
+##Case #5: along pony
