@@ -49,9 +49,8 @@ if __name__ == '__main__':
                 items = fp.readline().split()
                 result = ans(credit, totalitems, items)
                 print "Case #%d: %d %d" % (testcase+1, result[0], result[1])
-    except ValueError:
-        print "Exception caught"
-        print "Value is not provided"
+    except Exception:
+        print "Unable to parse the file"
 
 
 ##sample input:
