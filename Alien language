@@ -1,0 +1,114 @@
+Problem
+After years of study, scientists at Google Labs have discovered an alien
+language transmitted from a faraway planet. The alien language is very
+unique in that every word consists of exactly L lowercase letters. Also,
+there are exactly D words in this language.Once the dictionary of all the
+words in the alien language was built, the next breakthrough was to discover
+that the aliens have been transmitting messages to Earth for the past decade.
+Unfortunately, these signals are weakened due to the distance between our two
+planets and some of the words may be misinterpreted. In order to help them
+decipher these messages, the scientists have asked you to devise an algorithm
+that will determine the number of possible interpretations for a given pattern.
+A pattern consists of exactly L tokens. Each token is either a single lowercase
+letter (the scientists are very sure that this is the letter) or a group of
+unique lowercase letters surrounded by parenthesis ( and ). For example:
+(ab)d(dc) means the first letter is either a or b, the second letter is
+definitely d and the last letter is either d or c. Therefore, the pattern
+(ab)d(dc) can stand for either one of these 4 possibilities: add, adc, bdd, bdc.
+
+Input
+The first line of input contains 3 integers, L, D and N separated by a space.
+D lines follow, each containing one word of length L. These are the words that
+are known to exist in the alien language. N test cases then follow, each on its
+own line and each consisting of a pattern as described above. You may assume that
+all known words provided are unique.
+
+Output
+For each test case, output
+Case #X: K
+where X is the test case number, starting from 1, and K indicates how many
+words in the alien language match the pattern.
+
+
+import re
+
+def patlist(patstr):
+    """This function takes in the list of strings of alien lang
+    and makes everyword as a pattern"""
+    newlist = []
+    for i in range(len(str2)):
+        newlist.append(str2[i].replace('(', '[').replace(')', ']'))
+    return newlist
+
+def counting(newlist, knownword):
+    """This function takes in the pattern list and the known words and
+    checks whether it matches the pattern"""
+    for i in range(len(newlist)):
+        count = 0
+        for j in range(len(str1)):
+            if re.search(newlist[i], str1[j]):
+               count = count + 1
+        print "Case #%d: %d" % (i+1, count)
+
+if __name__ == '__main__':
+    str1 = []
+    str2 = []
+    with open('A-large-practice.in', 'r') as fp:
+        testcases = fp.readline().split()
+        for i in range(int(testcases[1])):
+            str1.append(str(fp.readline()).strip('\n'))
+        for i in range(int(testcases[2])):
+            str2.append(str(fp.readline()).strip('\n'))
+    x = patlist(str2)
+    counting(x, str1)
+
+
+##Sample input:
+##10 25 10
+##nwlrbbmqbh
+##cdarzowkky
+##hiddqscdxr
+##jmowfrxsjy
+##bldbefsarc
+##bynecdyggx
+##xpklorelln
+##mpapqfwkho
+##pkmcoqhnwn
+##kuewhsqmgb
+##buqcljjivs
+##wmdkqtbxix
+##mvtrrbljpt
+##nsnfwzqfjm
+##afadrrwsof
+##sbcnuvqhff
+##bsaqxwpqca
+##cehchzvfrk
+##mlnozjkpqp
+##xrjxkitzyx
+##acbhhkicqc
+##oendtomfgd
+##wdwfcgpxiq
+##vkuytdlcgd
+##ewhtacioho
+##rdtqkvwcsg
+##nwlr(nqxb)bm(dgqw)bh
+##(gu)(umo)(cdq)(bru)(ote)(xyk)(oah)(hwc)(vdm)(xr)
+##(aknw)(glmw)(jlue)(kruw)(bci)(xbu)(mue)(qemn)(tyab)(hmrd)
+##(ijklmopqrstuvyzabcefgh)(qrtuvwxyzabcdefghijklmnop)(ijmnopqsuvwxyabcdefgh)(fghijklmopqrstuvxyzbcde)(pqrstuvwxyzbcdefghijkno)(ghijlpqsuvwxyzabcdef)(yzbcdefgijlmnopqrstuvwx)(nopqrstuvwxyzabcdefghijklm)(klmnopqrsuvwxyzabcdefghj)(rstuvwxbcdefgijklmnopq)
+##(mnopqrstuvwxyzbcefgikl)(efghjkmnopqrstuvwxyzabcd)(tuvwxyzbcdefghijklmnopq)(pqrstuvwxyabcdefghijklmn)(cdefghijklmnopqstvxzab)(klmnoqrstuvwxyabcdeghi)(jlopqrsuvwxyzabdefghi)(cdefghijklmnopqruxzab)(abdefghijklmnpqrstuvwxz)(zabcdfgijklmnoprstuvwxy)
+##(rtwd)(dgmy)(sdqr)(kzc)(nqyb)(qtv)(qbc)(xijt)(vcil)(bnvx)
+##(ghjklmnpstuvwyzabcdef)(xyzabdegjklmnopqstuv)(abcdefghiklmnopqrstuwxz)(cdefghijklmnopqrstuvwxyab)(hjmnopqrstuvwxyzabcdefg)(rtvwyzabcdefghijklnop)(yzcdefhjklmnpqrstuvwx)(opqrstvwxyzabcdefghijklm)(qruvwxyzacdefgijlmno)(xyzabcegiklmnopqstuvw)
+##(almq)(fot)(pqah)(kovd)(ira)(mqr)(mvwx)(svbj)(sao)(zfi)
+##(opqrsvwxyzabcdefghijklmn)(yzabcdefgijklmnpqrstuvwx)(ijklmopqrstuvwxzabcefgh)(stuvwxyzabcdefhijklmnopq)(mnopqrstuvwxyzabdefghijkl)(ijklmnopqrstuvwxzbcdefh)(stuvwzabcdefgijklmnopq)(efghijklmnopqrsuvwxyacd)(rstuvxyzadefghijklmnopq)(noqrsuwxyzabdfghjlm)
+##
+##sample output:
+##Case #1: 0
+##Case #2: 1
+##Case #3: 0
+##Case #4: 1
+##Case #5: 6
+##Case #6: 7
+##Case #7: 1
+##Case #8: 8
+##Case #9: 1
+##Case #10: 8
