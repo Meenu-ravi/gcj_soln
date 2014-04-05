@@ -32,35 +32,24 @@
 
 import re
 
-def patlist(patstr):
-    """This function takes in the list of strings of alien lang
-    and makes everyword as a pattern"""
-    newlist = []
-    for i in range(len(str2)):
-        newlist.append(str2[i].replace('(', '[').replace(')', ']'))
-    return newlist
 
 def counting(newlist, knownword):
     """This function takes in the pattern list and the known words and
     checks whether it matches the pattern"""
     for i in range(len(newlist)):
         count = 0
-        for j in range(len(str1)):
-            if re.search(newlist[i], str1[j]):
+        for j in range(len(knownword)):
+            if re.search(newlist[i], knownword[j]):
                count = count + 1
         print "Case #%d: %d" % (i+1, count)
+        
 
 if __name__ == '__main__':
-    str1 = []
-    str2 = []
-    with open('A-large-practice.in', 'r') as fp:
+    with open('A-small-practice.in', 'r') as fp:
         testcases = fp.readline().split()
-        for i in range(int(testcases[1])):
-            str1.append(str(fp.readline()).strip('\n'))
-        for i in range(int(testcases[2])):
-            str2.append(str(fp.readline()).strip('\n'))
-    x = patlist(str2)
-    counting(x, str1)
+        str1 = [str(fp.readline()).strip('\n') for i in range(int(testcases[1]))]
+        str2 = [str(fp.readline()).strip('\n').replace('(', '[').replace(')', ']') for i in range(int(testcases[2]))]
+    counting(str2, str1)
 
 
 ##Sample input:
