@@ -1,0 +1,149 @@
+##Problem
+##Tic-Tac-Toe-Tomek is a game played on a 4 x 4 square board. The board
+##starts empty, except that a single 'T' symbol may appear in one of the
+##16 squares. There are two players: X and O. They take turns to make
+##moves, with X starting. In each move a player puts her symbol in one
+##of the empty squares. Player X's symbol is 'X', and player O's symbol
+##is 'O'.
+##
+##After a player's move, if there is a row, column or a diagonal
+##containing 4 of that player's symbols, or containing 3 of her symbols
+##and the 'T' symbol, she wins and the game ends. Otherwise the game
+##continues with the other player's move. If all of the fields are
+##filled with symbols and nobody won, the game ends in a draw. See the
+##sample input for examples of various winning positions.
+##
+##Given a 4 x 4 board description containing 'X', 'O', 'T' and '.'
+##characters (where '.' represents an empty square), describing the
+##current state of a game, determine the status of the Tic-Tac-Toe-Tomek
+##game going on. The statuses to choose from are:
+##
+##"X won" (the game is over, and X won)
+##"O won" (the game is over, and O won)
+##"Draw" (the game is over, and it ended in a draw)
+##"Game has not completed" (the game is not over yet)
+##
+##If there are empty cells, and the game is not over, you should output
+##"Game has not completed", even if the outcome of the game is
+##inevitable.
+##
+##Input The first line of the input gives the number of test cases, T. T
+##test cases follow. Each test case consists of 4 lines with 4
+##characters each, with each character being 'X', 'O', '.' or 'T'
+##(quotes for clarity only). Each test case is followed by an empty
+##line. Output
+##
+##For each test case, output one line containing "Case #x: y", where x
+##is the case number (starting from 1) and y is one of the statuses
+##given above. Make sure to get the statuses exactly right. When you run
+##your code on the sample input, it should create the sample output
+##exactly, including the "Case #1: ", the capital letter "O" rather than
+##the number "0", and so on. Limits
+##
+##The game board provided will represent a valid state that was reached
+##through play of the game Tic-Tac-Toe-Tomek as described above.
+
+
+def tiktactoe(row1, row2, row3, row4):
+    """This function gets the values of the 4 columns and rows as string and returns which the result of the match"""
+    result = ''
+    if (row1[0] + row2[1] + row3[2] + row4[3]).count('X') == 4 or ((row1[0] + row2[1] + row3[2] + row4[3]).count('X') == 3 and (row1[0] + row2[1] + row3[2] + row4[3]).count('T') == 1):
+        result = "X Won"
+    elif (row1[0] + row2[1] + row3[2] + row4[3]).count('O') == 4 or ((row1[0] + row2[1] + row3[2] + row4[3]).count('O') == 3 and (row1[0] + row2[1] + row3[2] + row4[3]).count('T') == 1):
+        result = "O Won"
+    elif (row1[3] + row2[2] + row3[1] + row4[0]).count('X') == 4 or ((row1[3] + row2[2] + row3[1] + row4[0]).count('X') == 3 and (row1[3] + row2[2] + row3[1] + row4[0]).count('T') == 1):
+        result = "X Won"
+    elif (row1[3] + row2[2] + row3[1] + row4[0]).count('O') == 4 or ((row1[3] + row2[2] + row3[1] + row4[0]).count('O') == 3 and (row1[3] + row2[2] + row3[1] + row4[0]).count('T') == 1):
+        result = "O Won"
+    else:
+        for i in range(4):
+            if (row1[i]+row2[i]+row3[i]+row4[i]).count('X') == 4 or ((row1[i]+row2[i]+row3[i]+row4[i]).count('X') == 3 and (row1[i]+row2[i]+row3[i]+row4[i]).count('T') == 1) or row1.count('X') == 4 or row2.count('X') == 4 or row3.count('X') == 4 or row4.count('X') == 4 or (row1.count('X') == 4 or (row1.count('X') == 3 and row1.count('T') == 1)) or (row2.count('X') == 4 or (row2.count('X') == 3 and row2.count('T') == 1)) or (row3.count('X') == 4 or (row3.count('X') == 3 and row3.count('T') == 1)) or (row4.count('X') == 4 or (row4.count('X') == 3 and row4.count('T') == 1)):
+                result = "X Won"
+                break
+            elif (row1[i]+row2[i]+row3[i]+row4[i]).count('O') == 4 or ((row1[i]+row2[i]+row3[i]+row4[i]).count('O') == 3 and (row1[i]+row2[i]+row3[i]+row4[i]).count('T') == 1) or row1.count('O') == 4 or row2.count('O') == 4 or row3.count('O') == 4 or row4.count('O') == 4 or (row1.count('O') == 4 or (row1.count('O') == 3 and row1.count('T') == 1)) or (row2.count('O') == 4 or (row2.count('O') == 3 and row2.count('T') == 1)) or (row3.count('O') == 4 or (row3.count('O') == 3 and row3.count('T') == 1)) or (row4.count('O') == 4 or (row4.count('O') == 3 and row4.count('T') == 1)):
+                result = "O Won"
+                break
+        else:
+            if ('.') in row1 or ('.') in row2 or ('.') in row3 or ('.') in row4:
+                result = "Game has not completed"
+            else:
+                result = "Draw"
+    return result
+
+
+if __name__ == '__main__':
+    with open('A-large-practice.in', 'r') as fp:
+        testcases = fp.readline().strip()
+        for tc in range(int(testcases)):
+            str1 = str(fp.readline())
+            str2 = str(fp.readline())
+            str3 = str(fp.readline())
+            str4 = str(fp.readline())
+            str(fp.readline())
+            soln = tiktactoe(str1,str2,str3,str4)
+            print "Case #%d: %s" % (tc+1, tiktactoe(str1,str2,str3,str4))
+
+
+##Sample input:
+##10
+##.X.O
+##..OO
+##....
+##.XTX
+##
+##XOXX
+##XOXX
+##TXOO
+##OOOX
+##
+##X..X
+##OOOO
+##X..X
+##XOOX
+##
+##OOOX
+##XXOT
+##OOXX
+##XOXX
+##
+##OOXX
+##OXOO
+##XXOX
+##XOOX
+##
+##X.XO
+##..OO
+##XO..
+##OX.X
+##
+##.OOX
+##XXTX
+##..OX
+##OO.X
+##
+##XOXO
+##OOOO
+##TX.X
+##OXXX
+##
+##....
+##....
+##....
+##....
+##
+##OO..
+##XXO.
+##XXXX
+##..OO
+##
+##Sample output:
+##Case #1: Game has not completed
+##Case #2: Draw
+##Case #3: O Won
+##Case #4: X Won
+##Case #5: Draw
+##Case #6: O Won
+##Case #7: X Won
+##Case #8: O Won
+##Case #9: Game has not completed
+##Case #10: X Won
