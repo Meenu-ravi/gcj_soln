@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+##Given the time in numerals we may convert it into words, as shown below:
+##
+##5:005:015:105:305:405:455:475:28→ five o' clock→ one minute past five→ ten minutes past five→ half past five→ twenty minutes to six→ quarter to six→ thirteen minutes to six→ twenty eight minutes past five
+##5:00→ five o' clock5:01→ one minute past five5:10→ ten minutes past five5:30→ half past five5:40→ twenty minutes to six5:45→ quarter to six5:47→ thirteen minutes to six5:28→ twenty eight minutes past five
+##Write a program which prints the time in words for the input given in the format mentioned above.
+##
+##Input Format
+##
+##There will be two lines of input:
+##HH, representing the hours
+##MM, representing the minutes
+##
+##Constraints
+##1≤H<121≤H<12
+##0≤M<600≤M<60
+##Output Format
+##
+##Display the time in words.
+##
+##Sample Input
+##
+##5  
+##47  
+##Sample Output
+##
+##thirteen minutes to six
+
+
+#/bin/python
+import sys
+
+word_num = {1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', \
+            6:'six', 7:'seven', 8:'eight', 9:'nine', 10:'ten', 11:'eleven', 12:'twelve',\
+            13:'thirteen', 14:'fourteen', 16:'sixteen', 17:'seventeen', \
+            18:'eighteen', 19:'nineteen', 20:'twenty', 21:'twenty one', 22:'twenty two', \
+            23:'twenty three', 24:'twenty four', 25:'twenty five', 26:'twenty six', \
+            27:'twenty seven', 28:'twenty eight', 29:'twenty nine'}
+
+
+h = int(raw_input().strip())
+m = int(raw_input().strip())
+if m > 30:
+    m = 60 - m
+    if m == 1:
+        print word_num[m] + ' minute to ' + word_num[h+1]
+    elif m == 15:
+        print 'quarter to ' + word_num[h+1]
+    else:
+        print word_num[m] + ' minutes to ' + word_num[h+1]
+elif m < 30 and m > 0:
+    if m == 1:
+        print word_num[m] + ' minute past ' + word_num[h]
+    elif m == 15:
+        print 'quarter past ' + word_num[h]
+    else:
+        print word_num[m] + ' minutes past ' + word_num[h]
+elif m == 30:
+    print 'half past ' + word_num[h]
+elif m == 0:
+    print word_num[h] + ' o\' clock'
+
+
+###To reduce the if conditions, modifying the dictionary more:
+
